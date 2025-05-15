@@ -1,0 +1,18 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Face Scan Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Smart Face Scan Attendance System</h1>
+
+    <a href="{{ url_for('attendance') }}">
+        <button>View Attendance</button>
+    </a>
+
+    <a href="{{ url_for('start_attendance') }}">
+        <button>Start Attendance</button>
+    </a>
+</body>
+</html> 
