@@ -1,0 +1,248 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Face Scan Attendance System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f8;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      color: #2980b9;
+    }
+    button {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #1c5980;
+    }
+    #info {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #555;
+      max-width: 500px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smart Face Scan Attendance System</h1>
+  <button id="startBtn" onclick="alert('Please run the main.py script using Python to start the attendance system.')">Start</button>
+  <div id="info">
+    This webpage only provides an overview.<br/>
+    To run the actual face recognition attendance system,<br/>
+    please launch <strong>main.py</strong> using Python on your computer.
+  </div>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Attendance Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f7f9fc;
+      padding: 40px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #0077b6;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background-color: #0077b6;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .note {
+      text-align: center;
+      margin-top: 20px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Today's Attendance</h1>
+  <table id="attendanceTable">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+  <div class="note">Data pulled live from Excel (Attendance.xlsx)</div>
+
+  <script>
+    fetch('/attendance')
+      .then(response => response.json())
+      .then(data => {
+        const table = document.getElementById("attendanceTable");
+        if (data.length > 0) {
+          // Set headers
+          const headers = Object.keys(data[0]);
+          const thead = table.querySelector("thead");
+          const headerRow = document.createElement("tr");
+          headers.forEach(h => {
+            const th = document.createElement("th");
+            th.innerText = h;
+            headerRow.appendChild(th);
+          });
+          thead.appendChild(headerRow);
+
+          // Fill rows
+          const tbody = table.querySelector("tbody");
+          data.forEach(row => {
+            const tr = document.createElement("tr");
+            headers.forEach(h => {
+              const td = document.createElement("td");
+              td.innerText = row[h] || "-";
+              tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+          });
+        } else {
+          table.innerHTML = "<p style='text-align:center;'>No data available for today.</p>";
+        }
+      })
+      .catch(error => {
+        console.error("Error loading attendance:", error);
+      });
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Face Scan Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Smart Face Scan Attendance System</h1>
+
+    <a href="{{ url_for('attendance') }}">
+        <button>View Attendance</button>
+    </a>
+
+    <a href="{{ url_for('start_attendance') }}">
+        <button>Start Attendance</button>
+    </a>
+</body>
+</html>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Face Scan Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Smart Face Scan Attendance System</h1>
+
+    <a href="{{ url_for('attendance') }}">
+        <button>View Attendance</button>
+    </a>
+
+    <a href="{{ url_for('start_attendance') }}">
+        <button>Start Attendance</button>
+    </a>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Face Scan Attendance</title>
+  <script>
+    async function captureAndSend() {
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      const video = document.getElementById('video');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const image = canvas.toDataURL('image/jpeg');
+      const response = await fetch('/scan', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ image: image })
+      });
+
+      const result = await response.json();
+      document.getElementById("result").innerText = result.message;
+    }
+
+    window.onload = () => {
+      const video = document.getElementById("video");
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => video.srcObject = stream)
+        .catch(err => alert("Webcam error: " + err));
+    };
+  </script>
+</head>
+<body>
+  <h1>Smart Face Scan Attendance</h1>
+  <video id="video" width="320" height="240" autoplay></video><br><br>
+  <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+  <button onclick="captureAndSend()">Scan Face</button>
+  <p id="result"></p>
+</body>
+</html>
