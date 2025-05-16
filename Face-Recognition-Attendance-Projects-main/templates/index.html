@@ -1,0 +1,104 @@
+ <!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Face Scan Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Smart Face Scan Attendance System</h1>
+
+    <a href="{{ url_for('attendance') }}">
+        <button>View Attendance</button>
+    </a>
+
+    <a href="{{ url_for('start_attendance') }}">
+        <button>Start Attendance</button>
+    </a>
+</body>
+</html> 
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Face Scan Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='background.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+        }
+
+        .container {
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            font-size: 14px;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Face Scan Attendance System</h1>
+        <p class="subtitle">Seamlessly track attendance using facial recognition</p>
+
+        <a href="{{ url_for('attendance') }}" class="btn">View Attendance</a>
+        <a href="{{ url_for('start_attendance') }}" class="btn">Start Attendance</a>
+    </div>
+
+    <footer>
+        &copy; 2025 SmartFace Inc. All rights reserved.
+    </footer>
+</body>
+</html>
